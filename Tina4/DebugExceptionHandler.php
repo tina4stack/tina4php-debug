@@ -9,6 +9,8 @@
 namespace Tina4;
 
 
+use Psr\Log\LogLevel;
+
 /**
  * This class handles exceptions
  * @package Tina4
@@ -30,11 +32,11 @@ class DebugExceptionHandler
         if (count($trace) > 0) {
             $trace = $trace[0];
             if (isset($trace["file"])) {
-                Debug::message("Backtrace:" . "\n[" . $trace["file"] . ":" . $trace["line"] . "]", TINA4_LOG_CRITICAL);
+                Debug::message("Backtrace:" . "\n[" . $trace["file"] . ":" . $trace["line"] . "]", LogLevel::CRITICAL);
             }
         }
 
-        Debug::message($exception->getMessage() . "\n[" . $exception->getFile() . ":" . $exception->getLine() . "]", TINA4_LOG_CRITICAL);
+        Debug::message($exception->getMessage() . "\n[" . $exception->getFile() . ":" . $exception->getLine() . "]", LogLevel::CRITICAL);
 
         if (TINA4_DEBUG) {
             if (isset($trace["file"])) {

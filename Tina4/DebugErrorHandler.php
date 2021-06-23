@@ -8,6 +8,8 @@
 
 namespace Tina4;
 
+use Psr\Log\LogLevel;
+
 /**
  * Debug error handler
  * @package Tina4
@@ -23,7 +25,7 @@ class DebugErrorHandler
      */
     public static function errorHandler(string $errorNo = "", string $errorString = "", string $errorFile = "", string $errorLine = ""): void
     {
-        Debug::message($errorString . "\n[" . $errorFile . ":" . $errorLine . "]", TINA4_LOG_ERROR);
+        Debug::message($errorString . "\n[" . $errorFile . ":" . $errorLine . "]", LogLevel::ERROR);
         Debug::$errors[] = ["time" => date("Y-m-d H:i:s"), "message" => "<span style=\"color:red\">Error($errorNo):</span> " . $errorString, "line" => $errorLine, "file" => $errorFile, "codeSnippet" => DebugCodeHandler::getCodeSnippet($errorFile, $errorLine)];
     }
 }
