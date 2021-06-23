@@ -47,6 +47,9 @@ require_once "vendor/autoload.php";
 \Tina4\Debug::message("Testing", TINA4_LOG_INFO);
 \Tina4\Debug::message("Testing", TINA4_LOG_CRITICAL);
 
+//Render the debug
+echo \Tina4\DebugRender::render();
+
 ```
 
 ### Log Levels
