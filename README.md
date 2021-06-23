@@ -35,7 +35,7 @@ require_once "vendor/autoload.php";
 //Set the log level of what you want reported to console
 //Can be an array of the values as listed below
 
-\Tina4\Debug::$logLevel = ["debug", "info"];
+\Tina4\Debug::$logLevel = [TINA4_LOG_DEBUG, TINA4_LOG_INFO];
 
 //You can code here as per normal
 
