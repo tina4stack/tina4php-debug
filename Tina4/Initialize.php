@@ -12,6 +12,17 @@
 const DEBUG_TEMPLATE = "debug.twig";
 const CONSOLE_TEMPLATE = "console.twig";
 
+//DEBUG & ERROR LOG CONSTANTS
+const TINA4_LOG_EMERGENCY = "emergency";
+const TINA4_LOG_ALERT = "alert";
+const TINA4_LOG_CRITICAL = "critical";
+const TINA4_LOG_ERROR = "error";
+const TINA4_LOG_WARNING = "warning";
+const TINA4_LOG_NOTICE = "notice";
+const TINA4_LOG_INFO = "info";
+const TINA4_LOG_DEBUG = "debug";
+const TINA4_LOG_ALL = "all";
+
 /**
  * Handle exceptions
  * @param Exception $exception
