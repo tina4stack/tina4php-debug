@@ -6,4 +6,4 @@ composer require tina4stack/tina4php-debug
 ```
 Exception handling and errors will be published to the screen automatically for you.
 
-![](.README_images/screenshot.png)
+![](.README_images/1168b9b3.png)
