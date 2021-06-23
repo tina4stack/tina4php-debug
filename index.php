@@ -21,11 +21,11 @@ $me = 10;
 
 $me / 0;
 
-echo \Tina4\Debug::message("Testing", \Psr\Log\LogLevel::DEBUG);
-echo \Tina4\Debug::message("Testing", \Psr\Log\LogLevel::WARNING);
-echo \Tina4\Debug::message("Testing", \Psr\Log\LogLevel::ERROR);
-echo \Tina4\Debug::message("Testing", \Psr\Log\LogLevel::INFO);
-echo \Tina4\Debug::message("Testing", \Psr\Log\LogLevel::CRITICAL);
+\Tina4\Debug::message("Testing", \Psr\Log\LogLevel::DEBUG);
+\Tina4\Debug::message("Testing", \Psr\Log\LogLevel::WARNING);
+\Tina4\Debug::message("Testing", \Psr\Log\LogLevel::ERROR);
+\Tina4\Debug::message("Testing", \Psr\Log\LogLevel::INFO);
+\Tina4\Debug::message("Testing", \Psr\Log\LogLevel::CRITICAL);
 
 throw new Exception("Hello", 1111);
 
