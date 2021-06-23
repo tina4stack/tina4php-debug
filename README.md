@@ -1,4 +1,5 @@
-# Tina4 Php Debug
+# Readme
+## Tina4 Php Debug
 
 A generic debugging module which can enhance your normal PHP project
 
