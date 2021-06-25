@@ -45,6 +45,36 @@ class Debug implements \Psr\Log\LoggerInterface
     }
 
     /**
+     * Gets a cool color for the output
+     * @param string $level
+     * @return string
+     */
+    final private function getColor(string $level): string
+    {
+        $color = $this->colorCyan;
+        switch ($level) {
+            case LogLevel::ALERT:
+                $color = $this->colorYellow;
+                break;
+            case LogLevel::NOTICE:
+                $color = $this->colorGreen;
+                break;
+            case LogLevel::INFO:
+                $color = $this->colorCyan;
+                break;
+            case LogLevel::WARNING:
+                $color = $this->colorOrange;
+                break;
+            case LogLevel::ERROR:
+            case LogLevel::CRITICAL:
+                $color = $this->colorRed;
+                break;
+        }
+        return $color;
+
+    }
+
+    /**
      * Logs a log for the current level
      * @param string $level
      * @param string $message
@@ -56,28 +86,10 @@ class Debug implements \Psr\Log\LoggerInterface
             if (!is_string($message)) {
                 $message .= "\n" . print_r($message, 1);
             }
-            switch ($level) {
-                case LogLevel::ALERT:
-                    $color = $this->colorYellow;
-                    break;
-                case LogLevel::NOTICE:
-                    $color = $this->colorGreen;
-                    break;
-                case LogLevel::INFO:
-                    $color = $this->colorCyan;
-                    break;
-                case LogLevel::WARNING:
-                    $color = $this->colorOrange;
-                    break;
-                case LogLevel::ERROR:
-                case LogLevel::CRITICAL:
-                    $color = $this->colorRed;
-                    break;
-                default:
-                    $color = $this->colorCyan;
-            }
 
             $debugLevel = implode("", self::$logLevel);
+
+            $color = $this->getColor($level);
 
             if (strpos($debugLevel, "all") !== false || strpos($debugLevel, $level) !== false) {
                 $output = $color . strtoupper($level) . $this->colorReset . ":" . $message;

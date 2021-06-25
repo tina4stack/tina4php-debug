@@ -60,7 +60,7 @@
     <h5>Error Log - You will see this message because .env contains <b style="color:darkblue">TINA4_DEBUG=true</b>,
         please make sure this setting is off in production</h5>
     {% for error in errors %}
-        <span class="error">{{ error.time }}: {{ error.message | raw }} in {{ error.file }} ({{ error.line }})</span>
+        <span class="error">{{ error.time }}: {{ error.message | raw }} in {{ error.file }} ({{ error.line }}) <a href="phpstorm://{{ error.file }}:{{ error.line }}">Edit</a></span>
         <pre class="code">
 {{ error.codeSnippet| raw }}
         </pre>

@@ -21,7 +21,7 @@
     "overtrue/phplint": "^2.0"
   },
   "scripts": {
-    "run-tests": "./vendor/bin/phpunit tests --color --log-junit=tests/junit.xml",
+    "test": "./vendor/bin/phpunit tests --color --log-junit=tests/junit.xml",
     "phpmetrics": "phpmetrics --report-html=phpmetrics --junit=tests/junit.xml ./Tina4"
   },
   "require": {
