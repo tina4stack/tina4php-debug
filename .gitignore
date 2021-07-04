@@ -3,3 +3,4 @@
 /vendor/
 /tests/junit.xml
 /log/
+/phpmetrics/
