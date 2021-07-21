@@ -49,7 +49,7 @@ class Debug implements \Psr\Log\LoggerInterface
      * @param string $level
      * @return string
      */
-    final private function getColor(string $level): string
+    private function getColor(string $level): string
     {
         $color = $this->colorCyan;
         switch ($level) {
