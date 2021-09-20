@@ -1,6 +1,6 @@
 <?php
 
-const TINA4_DOCUMENT_ROOT = "./";
+
 const TINA4_DEBUG = true;
 
 

@@ -83,6 +83,11 @@ class Debug implements \Psr\Log\LoggerInterface
     final public function log($level, $message, array $context = []): void
     {
         if (is_string($level)) {
+
+            if (!defined("TINA4_DOCUMENT_ROOT")) {
+                define("TINA4_DOCUMENT_ROOT", "./");
+            }
+
             if (!is_string($message)) {
                 $message .= "\n" . print_r($message, 1);
             }
