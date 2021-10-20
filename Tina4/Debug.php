@@ -30,6 +30,8 @@ class Debug implements \Psr\Log\LoggerInterface
     public $colorYellow = "\e[0;33m'";
     public $colorReset = "\e[0m";
 
+    public $documentRoot = "./";
+
     /**
      * Creates a debug message based on the debug level
      * @param string $message
@@ -84,8 +86,8 @@ class Debug implements \Psr\Log\LoggerInterface
     {
         if (is_string($level)) {
 
-            if (!defined("TINA4_DOCUMENT_ROOT")) {
-                define("TINA4_DOCUMENT_ROOT", "./");
+            if (defined("TINA4_DOCUMENT_ROOT")) {
+                $this->documentRoot = TINA4_DOCUMENT_ROOT;
             }
 
             if (!is_string($message)) {
@@ -99,10 +101,10 @@ class Debug implements \Psr\Log\LoggerInterface
             if (strpos($debugLevel, "all") !== false || strpos($debugLevel, $level) !== false) {
                 $output = $color . strtoupper($level) . $this->colorReset . ":" . $message;
                 error_log($output);
-                if (!file_exists(TINA4_DOCUMENT_ROOT . "/log") && !mkdir($concurrentDirectory = TINA4_DOCUMENT_ROOT . "/log", 0777, true) && !is_dir($concurrentDirectory)) {
+                if (!file_exists($this->documentRoot . "/log") && !mkdir($concurrentDirectory = $this->documentRoot . "/log", 0777, true) && !is_dir($concurrentDirectory)) {
                     throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
                 }
-                file_put_contents(TINA4_DOCUMENT_ROOT . "/log/debug.log", date("Y-m-d H:i:s: ") . $message . PHP_EOL, FILE_APPEND);
+                file_put_contents($this->documentRoot . "/log/debug.log", date("Y-m-d H:i:s: ") . $message . PHP_EOL, FILE_APPEND);
             }
         }
     }
