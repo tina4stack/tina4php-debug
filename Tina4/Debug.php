@@ -98,7 +98,7 @@ class Debug implements \Psr\Log\LoggerInterface
 
             $color = $this->getColor($level);
 
-            if (strpos($debugLevel, "all") !== false || strpos($debugLevel, $level) !== false) {
+            if ((defined("TINA4_DEBUG") && TINA4_DEBUG && strpos($debugLevel, "all") !== false) || strpos($debugLevel, $level) !== false) {
                 $output = $color . strtoupper($level) . $this->colorReset . ":" . $message;
                 error_log($output);
                 if (!file_exists($this->documentRoot . "/log") && !mkdir($concurrentDirectory = $this->documentRoot . "/log", 0777, true) && !is_dir($concurrentDirectory)) {
