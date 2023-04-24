@@ -27,7 +27,7 @@ class Debug implements \Psr\Log\LoggerInterface
     public $colorOrange = "\e[33;1m";
     public $colorGreen = "\e[32;1m";
     public $colorCyan = "\e[36;1m";
-    public $colorYellow = "\e[0;33m'";
+    public $colorYellow = "\e[0;33m";
     public $colorReset = "\e[0m";
 
     public $documentRoot = "./";
