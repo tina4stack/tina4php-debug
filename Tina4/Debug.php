@@ -97,14 +97,15 @@ class Debug implements \Psr\Log\LoggerInterface
             $debugLevel = implode("", self::$logLevel);
 
             $color = $this->getColor($level);
-
-            if ((defined("TINA4_DEBUG") && TINA4_DEBUG && strpos($debugLevel, "all") !== false) || strpos($debugLevel, $level) !== false) {
-                $output = $color . strtoupper($level) . $this->colorReset . ":" . $message;
-                error_log($output);
-                if (!file_exists($this->documentRoot . "/log") && !mkdir($concurrentDirectory = $this->documentRoot . "/log", 0777, true) && !is_dir($concurrentDirectory)) {
-                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+            if (defined("TINA4_DEBUG") && TINA4_DEBUG) {
+                if (strpos($debugLevel, "all") !== false || strpos($debugLevel, $level) !== false) {
+                    $output = $color . strtoupper($level) . $this->colorReset . ":" . $message;
+                    error_log($output);
+                    if (!file_exists($this->documentRoot . "/log") && !mkdir($concurrentDirectory = $this->documentRoot . "/log", 0777, true) && !is_dir($concurrentDirectory)) {
+                        throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+                    }
+                    file_put_contents($this->documentRoot . "/log/debug.log", date("Y-m-d H:i:s: ") . $message . PHP_EOL, FILE_APPEND);
                 }
-                file_put_contents($this->documentRoot . "/log/debug.log", date("Y-m-d H:i:s: ") . $message . PHP_EOL, FILE_APPEND);
             }
         }
     }
