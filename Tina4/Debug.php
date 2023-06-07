@@ -35,7 +35,7 @@ class Debug implements \Psr\Log\LoggerInterface
     /**
      * Creates a debug message based on the debug level
      * @param string $message
-     * @param string $level
+     * @param string $level TINA4_LOG_ALL, TINA4_LOG_DEBUG, TINA4_LOG_INFO, TINA4_LOG_WARNING, TINA4_LOG_ERROR
      */
     public static function message(string $message, string $level = LogLevel::INFO) : void
     {
