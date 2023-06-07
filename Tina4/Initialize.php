@@ -45,7 +45,7 @@ function tina4_exception_handler($exception)
  * @param string $errorFile
  * @param string $errorLine
  */
-function tina4_error_handler(string $errorNo = "", string $errorString = "", string $errorFile = "", string $errorLine = "")
+function tina4_error_handler(int $errorNo =0, string $errorString = "", string $errorFile = "", int $errorLine = 0)
 {
     \Tina4\DebugErrorHandler::errorHandler($errorNo, $errorString, $errorFile, $errorLine);
 }
