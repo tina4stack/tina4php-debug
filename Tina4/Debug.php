@@ -61,9 +61,6 @@ class Debug implements \Psr\Log\LoggerInterface
             case LogLevel::NOTICE:
                 $color = $this->colorGreen;
                 break;
-            case LogLevel::INFO:
-                $color = $this->colorCyan;
-                break;
             case LogLevel::WARNING:
                 $color = $this->colorOrange;
                 break;
