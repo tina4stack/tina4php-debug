@@ -11,17 +11,18 @@ require_once "vendor/autoload.php";
 
 
 
-$test / 10;
+//$test / 10;
 
-$me = 10;
+//$me = 10;
 
-$me / 0;
+//$me / 0;
 
 \Tina4\Debug::message("Testing", TINA4_LOG_DEBUG);
 \Tina4\Debug::message("Testing", TINA4_LOG_WARNING);
 \Tina4\Debug::message("Testing", TINA4_LOG_ERROR);
 \Tina4\Debug::message("Testing", TINA4_LOG_INFO);
 \Tina4\Debug::message("Testing", TINA4_LOG_CRITICAL);
+\Tina4\Debug::message("Alternative", TINA4_LOG_CRITICAL, "test.log");
 
 throw new Exception("Hello", 1111);
 

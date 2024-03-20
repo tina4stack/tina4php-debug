@@ -17,32 +17,38 @@ use Psr\Log\LogLevel;
  */
 class Debug implements \Psr\Log\LoggerInterface
 {
-    public static $errors = [];
-    public static $logLevel = [];
-    public static $context = [];
+    public static array $errors = [];
+    public static array $logLevel = [];
+    public static array $context = [];
 
     public static $logger;
 
-    public $colorRed = "\e[31;1m";
-    public $colorOrange = "\e[33;1m";
-    public $colorGreen = "\e[32;1m";
-    public $colorCyan = "\e[36;1m";
-    public $colorYellow = "\e[0;33m";
-    public $colorReset = "\e[0m";
+    public string $colorRed = "\e[31;1m";
+    public string $colorOrange = "\e[33;1m";
+    public string $colorGreen = "\e[32;1m";
+    public string $colorCyan = "\e[36;1m";
+    public string $colorYellow = "\e[0;33m";
+    public string $colorReset = "\e[0m";
 
-    public $documentRoot = "./";
+    public string $documentRoot = "./";
+
+    /**
+     * @var string Redirects logs to another file
+     */
+    public static string $alternativeFile = "debug.log";
 
     /**
      * Creates a debug message based on the debug level
      * @param string $message
      * @param string $level TINA4_LOG_ALL, TINA4_LOG_DEBUG, TINA4_LOG_INFO, TINA4_LOG_WARNING, TINA4_LOG_ERROR
+     * @param string $alternativeFile
      */
-    public static function message(string $message, string $level = LogLevel::INFO) : void
+    public static function message(string $message, string $level = LogLevel::INFO, string $alternativeFile="debug.log") : void
     {
         if (self::$logger === null) {
             self::$logger = new self();
         }
-
+        self::$alternativeFile = $alternativeFile;
         self::$logger->log($level, $message, self::$context);
     }
 
@@ -82,7 +88,6 @@ class Debug implements \Psr\Log\LoggerInterface
     final public function log($level, $message, array $context = []): void
     {
         if (is_string($level)) {
-
             if (defined("TINA4_DOCUMENT_ROOT")) {
                 $this->documentRoot = TINA4_DOCUMENT_ROOT;
             }
@@ -101,7 +106,8 @@ class Debug implements \Psr\Log\LoggerInterface
                     if (!file_exists($this->documentRoot . "/log") && !mkdir($concurrentDirectory = $this->documentRoot . "/log", 0777, true) && !is_dir($concurrentDirectory)) {
                         throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
                     }
-                    file_put_contents($this->documentRoot . "/log/debug.log", date("Y-m-d H:i:s: ") . $message . PHP_EOL, FILE_APPEND);
+
+                    file_put_contents($this->documentRoot . "/log/".self::$alternativeFile, date("Y-m-d H:i:s: ") . $message . PHP_EOL, FILE_APPEND);
                 }
             }
         }
