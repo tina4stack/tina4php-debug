@@ -4,8 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f0023268b1375cba2bd14f9c2e1c499",
+    "content-hash": "6d3dbbb26e1bc0faea0fd1b64851b433",
     "packages": [
+        {
+            "name": "cesargb/php-log-rotation",
+            "version": "2.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cesargb/php-log-rotation.git",
+                "reference": "bb54f44bba4c4d1b31f8621701595797f2d1b1cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cesargb/php-log-rotation/zipball/bb54f44bba4c4d1b31f8621701595797f2d1b1cf",
+                "reference": "bb54f44bba4c4d1b31f8621701595797f2d1b1cf",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cesargb\\Log\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cesar Garcia",
+                    "email": "cesargb@gmail.com"
+                }
+            ],
+            "description": "PHP Class to rotate log files",
+            "homepage": "https://github.com/cesargb/php-log-rotation",
+            "keywords": [
+                "log",
+                "php",
+                "rotation"
+            ],
+            "support": {
+                "issues": "https://github.com/cesargb/php-log-rotation/issues",
+                "source": "https://github.com/cesargb/php-log-rotation/tree/2.7.1"
+            },
+            "time": "2023-01-15T14:07:52+00:00"
+        },
         {
             "name": "psr/log",
             "version": "1.1.4",
@@ -3668,5 +3718,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

@@ -9,6 +9,8 @@
 namespace Tina4;
 
 use Psr\Log\LogLevel;
+use Cesargb\Log\Rotation;
+use Cesargb\Log\Exceptions\RotationFailed;
 
 /**
  * Debug class to make messages in the console
@@ -87,28 +89,34 @@ class Debug implements \Psr\Log\LoggerInterface
      */
     final public function log($level, $message, array $context = []): void
     {
-        if (is_string($level)) {
-            if (defined("TINA4_DOCUMENT_ROOT")) {
-                $this->documentRoot = TINA4_DOCUMENT_ROOT;
-            }
+        if (defined("TINA4_DOCUMENT_ROOT")) {
+            $this->documentRoot = TINA4_DOCUMENT_ROOT;
+        }
 
-            if (!is_string($message)) {
-                $message .= "\n" . print_r($message, 1);
-            }
+        if (!is_string($message)) {
+            $message .= "\n" . print_r($message, 1);
+        }
 
-            $debugLevel = implode("", self::$logLevel);
+        $debugLevel = implode("", self::$logLevel);
 
-            $color = $this->getColor($level);
-            if (defined("TINA4_DEBUG") && TINA4_DEBUG) {
-                if (strpos($debugLevel, "all") !== false || strpos($debugLevel, $level) !== false) {
-                    $output = $color . strtoupper($level) . $this->colorReset . ":" . $message;
-                    error_log($output);
-                    if (!file_exists($this->documentRoot . "/log") && !mkdir($concurrentDirectory = $this->documentRoot . "/log", 0777, true) && !is_dir($concurrentDirectory)) {
-                        throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
-                    }
-
-                    file_put_contents($this->documentRoot . "/log/".self::$alternativeFile, date("Y-m-d H:i:s: ") . $message . PHP_EOL, FILE_APPEND);
+        $color = $this->getColor($level);
+        if (defined("TINA4_DEBUG") && TINA4_DEBUG) {
+            if (strpos($debugLevel, "all") !== false || strpos($debugLevel, $level) !== false) {
+                $output = $color . strtoupper($level) . $this->colorReset . ":" . $message;
+                error_log($output);
+                if (!file_exists($this->documentRoot . "/log") && !mkdir($concurrentDirectory = $this->documentRoot . "/log", 0777, true) && !is_dir($concurrentDirectory)) {
+                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
                 }
+
+                file_put_contents($this->documentRoot . "/log/".self::$alternativeFile, date("Y-m-d H:i:s: ") . $message . PHP_EOL, FILE_APPEND);
+
+                //See if we need to rotate the log files
+                $rotation = new Rotation();
+                $rotation->compress() // Optional, compress the file after rotated. Accept level compression argument.
+                         ->files(TINA4_LOG_ROTATIONS) // Optional, files are rotated 5 times before being removed. Default 5
+                         ->minSize(TINA4_LOG_SIZE) // Optional, are rotated when they grow bigger than 1MB. Default 0
+                         ->truncate() // Optional, truncate the original log file in place after creating a copy, instead of moving the old log file.
+                         ->rotate($this->documentRoot . "/log/".self::$alternativeFile);
             }
         }
     }
