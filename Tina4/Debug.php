@@ -110,6 +110,14 @@ class Debug implements \Psr\Log\LoggerInterface
 
                 file_put_contents($this->documentRoot . "/log/".self::$alternativeFile, date("Y-m-d H:i:s: ") . $message . PHP_EOL, FILE_APPEND);
 
+                if (!defined("TINA4_LOG_SIZE")) {
+                    define("TINA4_LOG_SIZE", 1024*1024); //1MB
+                }
+
+                if (!defined("TINA4_LOG_ROTATIONS")) {
+                    define("TINA4_LOG_ROTATIONS", 5); //Keep 5 rotations of files
+                }
+
                 //See if we need to rotate the log files
                 $rotation = new Rotation();
                 $rotation->compress() // Optional, compress the file after rotated. Accept level compression argument.

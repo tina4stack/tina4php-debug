@@ -23,13 +23,6 @@ const TINA4_LOG_INFO = "info";
 const TINA4_LOG_DEBUG = "debug";
 const TINA4_LOG_ALL = "all";
 
-if (!defined("TINA4_LOG_SIZE")) {
-    define("TINA4_LOG_SIZE", 1024*1024); //1MB
-}
-
-if (!defined("TINA4_LOG_ROTATIONS")) {
-    define("TINA4_LOG_ROTATIONS", 5); //Keep 5 rotations of files
-}
 
 /**
  * Handle exceptions
