@@ -104,9 +104,9 @@ class Debug implements \Psr\Log\LoggerInterface
             if (strpos($debugLevel, "all") !== false || strpos($debugLevel, $level) !== false) {
                 $output = $color . strtoupper($level) . $this->colorReset . ":" . $message;
                 if (!defined("TINA4_DEBUG_LENGTH")) {
-                    define ("TINA4_DEBUG_LENGTH", 500);
+                    define ("TINA4_DEBUG_LENGTH", 200);
                 }
-                error_log(substr($output,0, TINA4_DEBUG_LENGTH).(strlen($output) > TINA4_DEBUG_LENGTH) ? "..." : "");
+                error_log(substr($output,0, TINA4_DEBUG_LENGTH).((strlen($output) > TINA4_DEBUG_LENGTH) ? "..." : ""));
                 if (!file_exists($this->documentRoot . "/log") && !mkdir($concurrentDirectory = $this->documentRoot . "/log", 0777, true) && !is_dir($concurrentDirectory)) {
                     throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
                 }
