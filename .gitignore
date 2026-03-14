@@ -4,3 +4,5 @@
 /tests/junit.xml
 /log/
 /phpmetrics/
+.phpunit.cache
+.claude/

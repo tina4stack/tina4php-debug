@@ -25,6 +25,8 @@ class Debug implements \Psr\Log\LoggerInterface
 
     public static $logger;
 
+    private static ?Rotation $rotation = null;
+
     public string $colorRed = "\e[31;1m";
     public string $colorOrange = "\e[33;1m";
     public string $colorGreen = "\e[32;1m";
@@ -122,12 +124,14 @@ class Debug implements \Psr\Log\LoggerInterface
                 }
 
                 //See if we need to rotate the log files
-                $rotation = new Rotation();
-                $rotation->compress() // Optional, compress the file after rotated. Accept level compression argument.
-                         ->files(TINA4_LOG_ROTATIONS) // Optional, files are rotated 5 times before being removed. Default 5
-                         ->minSize(TINA4_LOG_SIZE) // Optional, are rotated when they grow bigger than 1MB. Default 0
-                         ->truncate() // Optional, truncate the original log file in place after creating a copy, instead of moving the old log file.
-                         ->rotate($this->documentRoot . "/log/".self::$alternativeFile);
+                if (self::$rotation === null) {
+                    self::$rotation = new Rotation();
+                    self::$rotation->compress()
+                         ->files(TINA4_LOG_ROTATIONS)
+                         ->minSize(TINA4_LOG_SIZE)
+                         ->truncate();
+                }
+                self::$rotation->rotate($this->documentRoot . "/log/".self::$alternativeFile);
             }
         }
     }

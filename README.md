@@ -65,3 +65,13 @@ const TINA4_LOG_INFO = "info";
 const TINA4_LOG_DEBUG = "debug";
 const TINA4_LOG_ALL = "all";
 ```
+
+---
+
+## Our Sponsors
+
+**Sponsored with 🩵 by Code Infinity**
+
+[<img src="https://codeinfinity.co.za/wp-content/uploads/2025/09/c8e-logo-github.png" alt="Code Infinity" width="100">](https://codeinfinity.co.za/about-open-source-policy?utm_source=github&utm_medium=website&utm_campaign=opensource_campaign&utm_id=opensource)
+
+*Supporting open source communities <span style="color: #1DC7DE;">•</span> Innovate <span style="color: #1DC7DE;">•</span> Code <span style="color: #1DC7DE;">•</span> Empower*
